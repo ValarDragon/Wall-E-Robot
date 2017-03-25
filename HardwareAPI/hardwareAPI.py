@@ -1,10 +1,10 @@
 import os
 import logging
 if(os.name == "posix"):
-    if("raspberrypi" in str(os.system("uname -a"))):
-        import RPi.GPIO as GPIO
-    else:
-        print("Running on Linux System that is not RaspberryPI, things will probably break quickly.")
+    #if("raspberrypi" in str(os.system("uname -a"))):
+    import RPi.GPIO as GPIO
+    #else:
+    #    print("Running on Linux System that is not RaspberryPI, things will probably break quickly.")
 else:
     print("Running on Windows System not (a) RaspberryPI, things will probably break quickly.")
 
