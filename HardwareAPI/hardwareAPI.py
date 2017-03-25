@@ -22,5 +22,7 @@ class WallEHardware:
     def go(self):
         if(self.states[7] == True):
             GPIO.output(7,False)
+            self.states[7] == False
         if(self.states[7] == False):
             GPIO.output(7,True)
+            self.states[7] == False
