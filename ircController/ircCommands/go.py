@@ -3,15 +3,16 @@ import socket
 import logging
 import ircController.ircCommands.ircCommand as ircCommandClass
 
-class echoCommand(ircCommandClass.ircCommand):
+class goCommand(ircCommandClass.ircCommand):
 
-    def __init__(self):
+    def __init__(self,hardwareAPI):
         self.logger = logging.getLogger("WallE.ircCommands.echo")
         self.name = "go"
         self.cmdAliases = ["go"]
         self.permssionLevel = -1
         self.usage = ".go"
         self.go = "moves forward '\r\n'" + self.usage
+        self.hardwareAPI = hardwareAPI
 
 
 
@@ -39,4 +40,4 @@ class echoCommand(ircCommandClass.ircCommand):
 
     def onCommand(self,irc, sender, chan, args):
         """Do Command"""
-        irc.printToIRC(' '.join(args),chan)
+        hardwareAPI.go()

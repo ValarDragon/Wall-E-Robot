@@ -5,7 +5,7 @@ import ircController.ircCommands.ircCommand as ircCommandClass
 
 class echoCommand(ircCommandClass.ircCommand):
 
-    def __init__(self):
+    def __init__(self,hardwareAPI):
         self.logger = logging.getLogger("WallE.ircCommands.echo")
         self.name = "echo"
         self.cmdAliases = ["echo"]

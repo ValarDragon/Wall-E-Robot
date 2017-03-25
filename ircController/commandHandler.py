@@ -11,11 +11,12 @@ import ircController.ircCommands.go as goCommandClass
 
 class commandHandler:
     """Daemon to control the robot via IRC"""
-    def __init__(self, irc):
+    def __init__(self, irc, hardwareAPI):
         self.irc = irc
         self.logger = logging.getLogger("WallE.commandHandler")
         self.commands = []
-        self.commands.append(echoCommandClass.echoCommand())
+        self.commands.append(echoCommandClass.echoCommand(hardwareAPI))
+        self.commands.append(goCommandClass.goCommand(hardwareAPI))
 
     def executeCommand(self,line):
         cmdName = (line[3][2:]).lower()

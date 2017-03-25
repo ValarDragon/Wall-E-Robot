@@ -9,7 +9,7 @@ import ircController.commandHandler as commandHandlerClass
 
 class ircDaemon:
     """Daemon to control the robot via IRC"""
-    def __init__(self):
+    def __init__(self,hardwareAPI):
         #TODO load these from config
         self.SSL = True
         self.HOST = "irc.hackthissite.org"
@@ -23,11 +23,12 @@ class ircDaemon:
 
         self.readBuffer = ""
         self.logger = logging.getLogger("WallE.ircDaemon")
+        self.hardwareAPI = hardwareAPI
 
     def setupDaemon(self):
         self.connectToServer()
         self.connectToChan()
-        self.commandHandler = commandHandlerClass.commandHandler(self)
+        self.commandHandler = commandHandlerClass.commandHandler(self, self.hardwareAPI)
         for i in range(60):
             self.sock.recv(self.RECVBLOCKSIZE)
         while(True):
