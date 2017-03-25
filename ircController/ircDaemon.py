@@ -88,13 +88,10 @@ class ircDaemon:
 
             elif(line[1]=="PRIVMSG"):
                 cmd=line[3]
-                #print(cmd)
                 cmd=cmd[1:]
                 if(cmd.startswith(self.COMMANDPREFIX)):
                     self.logger.info(str(line))
-                    self.printToIRC(cmd)
                     self.commandHandler.executeCommand(line)
-                    #cmdParser(user,line,cmd[len(COMMANDPREFIX):])
 
     def printBytes(self, msg):
         """Print bytes directly to server"""
