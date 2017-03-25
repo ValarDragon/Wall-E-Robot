@@ -40,4 +40,4 @@ class goCommand(ircCommandClass.ircCommand):
 
     def onCommand(self,irc, sender, chan, args):
         """Do Command"""
-        hardwareAPI.go()
+        self.hardwareAPI.go()

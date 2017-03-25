@@ -13,10 +13,10 @@ class WallEHardware:
         #TODO load these from config
         #Load everything from config
         self.logger = logging.getLogger("WallE.hardware")
-        #GPIO.setmode(GPIO.BOARD)
-        #GPIO.setup(7,GPIO.OUT)
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(7,GPIO.OUT)
         self.states = ["dummy"] * 24
-        #GPIO.output(7,False)
+        GPIO.output(7,False)
         self.states[7] = False
 
     def go(self):
