@@ -7,6 +7,7 @@ import sys
 import traceback
 import time
 import ircController.ircCommands.echo as echoCommandClass
+import ircController.ircCommands.go as goCommandClass
 
 class commandHandler:
     """Daemon to control the robot via IRC"""
