@@ -4,6 +4,7 @@ from logging.config import fileConfig
 import sys
 import ircController.ircDaemon
 import HardwareAPI.hardwareAPI
+import configparser
 
 def init(argv):
     #load db stuff here
@@ -14,9 +15,15 @@ def init(argv):
 
 def main():
     #load this from config
-    useIrcController = True
+    logger = logging.getLogger("WallE")
     hardwareAPI = HardwareAPI.hardwareAPI.WallEHardware()
-    if(useIrcController):
+
+    controllerConfig = configparser.ConfigParser()
+    controllerConfig.read('controllerConfig.ini')
+    if('Controllers' not in controllerConfig):
+        print("Bad Controller Config")
+        logger.error("Error in Controller Config. No [Controllers] Section Found.")
+    if(controllerConfig["Controllers"]["irc"].lower().strip() == "true"):
         #Have this in a seperate thread, so we can support multiple controllers?
         irc = ircController.ircDaemon.ircDaemon(hardwareAPI)
         #TODO add way to connect to multiple channels

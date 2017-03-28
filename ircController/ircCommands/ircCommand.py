@@ -10,7 +10,7 @@ class ircCommand:
 
     def getCmdAliases(self):
         """Return string array with aliases for cmd"""
-        raise NotImplementedError("getName() in ircCommand is not implemented")
+        raise NotImplementedError("getCmdAliases() in ircCommand is not implemented")
 
     def getPermissionLevel(self):
         """Return integer for permission level"""

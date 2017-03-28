@@ -40,4 +40,8 @@ class goCommand(ircCommandClass.ircCommand):
 
     def onCommand(self,irc, sender, chan, args):
         """Do Command"""
-        self.hardwareAPI.go()
+        isMoving = self.hardwareAPI.go()
+        if(isMoving):
+            irc.printToIRC("I am moving!",chan)
+        elif(not isMoving):
+            irc.printToIRC("I have ceased moving",chan)
