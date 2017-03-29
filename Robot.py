@@ -14,7 +14,6 @@ def init(argv):
     main()
 
 def main():
-    #load this from config
     logger = logging.getLogger("WallE")
     hardwareAPI = HardwareAPI.hardwareAPI.WallEHardware()
 
@@ -23,7 +22,7 @@ def main():
     if('Controllers' not in controllerConfig):
         print("Bad Controller Config")
         logger.error("Error in Controller Config. No [Controllers] Section Found.")
-    if(controllerConfig["Controllers"]["irc"].lower().strip() == "true"):
+    if(controllerConfig["Controllers"].getboolean("irc")):
         #Have this in a seperate thread, so we can support multiple controllers?
         irc = ircController.ircDaemon.ircDaemon(hardwareAPI)
         #TODO add way to connect to multiple channels

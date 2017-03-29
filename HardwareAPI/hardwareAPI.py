@@ -37,6 +37,8 @@ if(os.name == "posix"):
     if("raspberrypi" in runProcess("uname -a",getOutput=True)):
         import RPi.GPIO as GPIO
     else:
-        print("Running on Linux System that is not RaspberryPI, things will probably break quickly.")
+        print("Running on Linux System that is not RaspberryPI, if things break update dummyGPIO.")
+        import HardwareAPI.dummyGPIO as GPIO
 else:
-    print("Running on Windows System not on a RaspberryPI, things will probably break quickly.")
+    print("Running on Windows System not on a RaspberryPI, if things break update dummyGPIO.")
+    import HardwareAPI.dummyGPIO as GPIO

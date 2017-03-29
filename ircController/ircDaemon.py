@@ -6,23 +6,28 @@ import sys
 import traceback
 import time
 import ircController.commandHandler as commandHandlerClass
+import configparser
 
 class ircDaemon:
     """Daemon to control the robot via IRC"""
     def __init__(self,hardwareAPI):
-        #TODO load these from config
-        self.SSL = True
-        self.HOST = "irc.hackthissite.org"
-        self.PORT = 7000
-        self.CHAN = "#bots"
-        self.NICK = "Wall-E"
-        self.IDENT = "Glados"
-        self.REALNAME = "Glados"
+        self.logger = logging.getLogger("WallE.ircDaemon")
+
+        ircConfig = configparser.ConfigParser()
+        ircConfig.read('ircController/ircConfig.ini')
+        if('server' not in ircConfig or 'username' not in ircConfig or 'syntax' not in ircConfig):
+            self.logger.error("Error in IRC Config. Missing the [server] or [username] or [syntax] Section.")
+        self.SSL = ircConfig['server'].getboolean('ssl')
+        self.HOST = ircConfig['server']['host']
+        self.PORT = ircConfig['server'].getint('port')
+        self.CHAN = ircConfig['server']['chan']
+        self.NICK = ircConfig['username']['nick']
+        self.IDENT = ircConfig['username']['ident']
+        self.REALNAME = ircConfig['username']['realname']
         self.RECVBLOCKSIZE = 2048
-        self.COMMANDPREFIX = "."
+        self.COMMANDPREFIX = ircConfig['syntax']['commandprefix']
 
         self.readBuffer = ""
-        self.logger = logging.getLogger("WallE.ircDaemon")
         self.hardwareAPI = hardwareAPI
 
     def setupDaemon(self):
